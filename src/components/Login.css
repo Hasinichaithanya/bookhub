@@ -1,0 +1,28 @@
+.login-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.website-login-image {
+  height: 100vh;
+}
+
+.input-container {
+  width: 360px;
+  height: 90px;
+  top: 414px;
+  left: 921px;
+  padding: 3px, 0px, 0px, 0px;
+}
+input {
+  width: 360px;
+  height: 56px;
+  top: 34px;
+}
+button {
+  width: 360px;
+  height: 56px;
+  top: 650px;
+  left: 921px;
+}

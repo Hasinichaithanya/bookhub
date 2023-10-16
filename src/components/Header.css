@@ -1,0 +1,35 @@
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 89px;
+}
+.header-heading {
+  text-decoration: none;
+  padding: 10px;
+}
+.home {
+  color: #0284c7;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.logout-btn {
+  background-color: #0284c7;
+  color: white;
+  width: 70px;
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+}
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

@@ -6,7 +6,7 @@ const Header = () => (
     <Link to="/" className="home header-heading">
       <img
         src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
-        alt="login website logo"
+        alt="website logo"
         className="website-logo-image"
       />
     </Link>

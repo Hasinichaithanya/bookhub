@@ -7,7 +7,7 @@ const Login = () => (
       alt="website login"
       className="website-login-image"
     />
-    <div className="login-sub-container">
+    <form className="login-sub-container">
       <img
         src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
         alt="login website logo"
@@ -24,9 +24,9 @@ const Login = () => (
         <input type="password" placeholder="password" id="password" />
       </div>
       <div>
-        <button type="button">Login</button>
+        <button type="submit">Login</button>
       </div>
-    </div>
+    </form>
   </div>
 )
 export default Login

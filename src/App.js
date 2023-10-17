@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import Header from './components/Header'
 import Home from './components/Home'
 import Login from './components/Login'
@@ -34,17 +34,17 @@ const bookshelvesList = [
 const App = () => (
   <>
     <Header />
-    <Routes>
-      <Route path="/" exact element={<Home />} />
-      <Route path="/login" exact element={<Login />} />
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/login" exact component={Login} />
       <Route
         path="/shelf"
         exact
-        element={<BookShelves bookshelvesList={bookshelvesList} />}
+        render={() => <BookShelves bookshelvesList={bookshelvesList} />}
       />
-      <Route path="/books/:id" exact element={<BookDetails />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+      <Route path="/books/:id" exact component={BookDetails} />
+      <Route path="*" component={NotFound} />
+    </Switch>
   </>
 )
 

@@ -1,35 +1,40 @@
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
+import Cookies from 'js-cookie'
 import './Header.css'
 
-const Header = () => (
-  <div className="header-container">
-    <Link to="/" className="home header-heading">
-      <img
-        src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
-        alt="website logo"
-        className="website-logo-image"
-      />
-    </Link>
-    <ul>
-      <li>
+const Header = props => {
+  const {history} = props
+  const onLogout = () => {
+    Cookies.remove('jwt_token')
+    history.replace('/login')
+  }
+  return (
+    <div className="header-container">
+      <Link to="/" className="home header-heading">
+        <img
+          src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
+          alt="website logo"
+          className="website-logo-image"
+        />
+      </Link>
+      <ul>
         <Link to="/" className="home header-heading">
-          Home
+          <li>Home</li>
         </Link>
-      </li>
-      <li>
         <Link to="/shelf" className="header-heading">
-          Books
+          <li>Bookshelves</li>
         </Link>
-      </li>
-      <li>
-        <Link to="/login" className="header-heading">
-          <button type="button" className="logout-btn">
-            Logout
-          </button>
-        </Link>
-      </li>
-    </ul>
-  </div>
-)
 
-export default Header
+        <button
+          type="button"
+          onClick={onLogout}
+          className="logout-btn header-heading"
+        >
+          Logout
+        </button>
+      </ul>
+    </div>
+  )
+}
+
+export default withRouter(Header)

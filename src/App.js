@@ -1,5 +1,5 @@
 import {Switch, Route} from 'react-router-dom'
-import Header from './components/Header'
+
 import Home from './components/Home'
 import Login from './components/Login'
 import BookShelves from './components/BookShelves'
@@ -33,7 +33,6 @@ const bookshelvesList = [
 
 const App = () => (
   <>
-    <Header />
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/login" exact component={Login} />

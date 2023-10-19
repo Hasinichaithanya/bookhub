@@ -1,0 +1,9 @@
+.top-books-heading {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.top-books-container {
+  background-color: #ffffff;
+}

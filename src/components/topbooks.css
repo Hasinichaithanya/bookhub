@@ -6,15 +6,24 @@
 }
 
 .slick-container {
-  width: 80%;
+  width: 90%;
   max-width: 1100px;
   margin-top: 10px;
 }
 
 .logo-image {
-  margin: 0px 10px;
-  height: 100px;
-  width: 100px;
+  width: 350px;
+  height: 292px;
+  top: 409px;
+  left: 171px;
+  border-radius: 4px;
+}
+.heading {
+  font-size: 20px;
+  color: #334155;
+}
+p {
+  color: #475569;
 }
 
 /* You can change the CSS color to style the Next and 

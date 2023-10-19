@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import {Component} from 'react'
-import {Redirect, Link} from 'react-router-dom'
+import {Route, Redirect, Link} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 
 import './home.css'
@@ -11,6 +11,7 @@ import Footer from './Footer'
 class Home extends Component {
   state = {
     topbooks: [],
+    errorMsg: '',
   }
 
   componentDidMount() {
@@ -41,16 +42,19 @@ class Home extends Component {
       this.setState({
         topbooks: updatedData,
       })
+    } else {
+      this.setState({
+        errorMsg: response.error_msg,
+      })
     }
   }
 
   render() {
-    const {topbooks} = this.state
+    const {topbooks, errorMsg} = this.state
     const token = Cookies.get('jwt_token')
     if (token === undefined) {
       return <Redirect to="/login" />
     }
-
     return (
       <div>
         <Header />
@@ -60,11 +64,13 @@ class Home extends Component {
           enjoyed in the past, and we will give you surprisingly insightful
           recommendations.
         </p>
-        <div>
-          <h3>Top Rated Books</h3>
-          <Link to="/shelf">
-            <button type="button">Find Books</button>
-          </Link>
+        <div className="too-books-container">
+          <div className="top-books-heading">
+            <h3 className="heading">Top Rated Books</h3>
+            <Link to="/shelf">
+              <button type="button">Find Books</button>
+            </Link>
+          </div>
 
           {topbooks.length > 0 ? (
             <TopBooks topbooks={topbooks} />

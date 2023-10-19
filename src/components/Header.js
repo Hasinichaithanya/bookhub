@@ -9,7 +9,7 @@ const Header = props => {
     history.replace('/login')
   }
   return (
-    <div className="header-container">
+    <nav className="header-container">
       <Link to="/" className="home header-heading">
         <img
           src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
@@ -33,7 +33,7 @@ const Header = props => {
           Logout
         </button>
       </ul>
-    </div>
+    </nav>
   )
 }
 

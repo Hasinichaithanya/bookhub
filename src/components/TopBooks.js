@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import Slider from 'react-slick'
 import './topbooks.css'
 
@@ -40,11 +41,13 @@ class TopBooks extends Component {
         {topbooks.map(each => {
           const {id, coverPic, title, authorName} = each
           return (
-            <div className="slick-item" key={id}>
-              <img className="logo-image" src={coverPic} alt="cover pic" />
-              <h1 className="heading">{title}</h1>
-              <p>{authorName}</p>
-            </div>
+            <li className="slick-item" key={id}>
+              <Link to={`/books/${id}`}>
+                <img className="logo-image" src={coverPic} alt="cover pic" />
+                <h1 className="heading">{title}</h1>
+                <p>{authorName}</p>
+              </Link>
+            </li>
           )
         })}
       </Slider>

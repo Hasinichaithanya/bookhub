@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import {Component} from 'react'
-import {Route, Redirect, Link} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 
 import './home.css'
@@ -8,10 +8,17 @@ import Header from './Header'
 import TopBooks from './TopBooks'
 import Footer from './Footer'
 
+const constants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
+
 class Home extends Component {
   state = {
     topbooks: [],
-    errorMsg: '',
+    apiStatus: constants.initial,
   }
 
   componentDidMount() {
@@ -19,6 +26,9 @@ class Home extends Component {
   }
 
   CallApis = async () => {
+    this.setState({
+      apiStatus: constants.inProgress,
+    })
     const token = Cookies.get('jwt_token')
     const options = {
       method: 'GET',
@@ -41,23 +51,39 @@ class Home extends Component {
       console.log(updatedData)
       this.setState({
         topbooks: updatedData,
+        apiStatus: constants.success,
       })
     } else {
       this.setState({
-        errorMsg: response.error_msg,
+        apiStatus: constants.failure,
       })
     }
   }
 
-  render() {
-    const {topbooks, errorMsg} = this.state
-    const token = Cookies.get('jwt_token')
-    if (token === undefined) {
-      return <Redirect to="/login" />
-    }
+  renderFailure = () => (
+    <div>
+      <img
+        src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697777828/Group_7522_dshfkz.png"
+        alt="failure view"
+      />
+      <p>Something went wrong, Please try again.</p>
+      <button type="button" onClick={this.CallApis}>
+        Try Again
+      </button>
+    </div>
+  )
+
+  loadingView = () => (
+    <div className="loader-container" testid="loader">
+      <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
+    </div>
+  )
+
+  renderBooksSection = () => {
+    const {topbooks} = this.state
+
     return (
-      <div>
-        <Header />
+      <>
         <h1>Find Your Next Favorite Books? </h1>
         <p>
           You are in the right place. Tell us what titles or genres you have
@@ -71,15 +97,38 @@ class Home extends Component {
               <button type="button">Find Books</button>
             </Link>
           </div>
-
-          {topbooks.length > 0 ? (
+          <ul>
             <TopBooks topbooks={topbooks} />
-          ) : (
-            <div className="loader-container" testid="loader">
-              <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
-            </div>
-          )}
+          </ul>
         </div>
+      </>
+    )
+  }
+
+  renderBooks = () => {
+    const {apiStatus} = this.state
+
+    switch (apiStatus) {
+      case constants.success:
+        return this.renderBooksSection()
+      case constants.failure:
+        return this.renderFailure()
+      case constants.inProgress:
+        return this.loadingView()
+      default:
+        return null
+    }
+  }
+
+  render() {
+    const token = Cookies.get('jwt_token')
+    if (token === undefined) {
+      return <Redirect to="/login" />
+    }
+    return (
+      <div>
+        <Header />
+        {this.renderBooks()}
         <Footer />
       </div>
     )

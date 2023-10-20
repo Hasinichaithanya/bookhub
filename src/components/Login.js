@@ -28,17 +28,24 @@ class Login extends Component {
     event.preventDefault()
     const {username, password} = this.state
     const userDetails = {username, password}
-    const url = 'https://apis.ccbp.in/login'
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-    }
-    const response = await fetch(url, options)
-    const data = await response.json()
-    if (response.ok === true) {
-      this.onSuccess(data.jwt_token)
-    } else {
-      this.onFailure(data.error_msg)
+    if (username !== '' && password !== '') {
+      const url = 'https://apis.ccbp.in/login'
+      const options = {
+        method: 'POST',
+        body: JSON.stringify(userDetails),
+      }
+      const response = await fetch(url, options)
+      const data = await response.json()
+      if (response.ok === true) {
+        this.onSuccess(data.jwt_token)
+      } else {
+        this.onFailure(data.error_msg)
+      }
+    } else if (username === '' || password === '') {
+      this.setState({
+        submitErrorMsg: true,
+        errorMsg: 'username and password are required',
+      })
     }
   }
 
@@ -63,7 +70,7 @@ class Login extends Component {
           alt="website login"
           className="website-login-image"
         />
-        <form className="login-sub-container" onSubmit={this.onSubmitForm}>
+        <form className="login-sub-container">
           <img
             src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
             alt="login website logo"
@@ -92,8 +99,10 @@ class Login extends Component {
             />
           </div>
           <div>
-            <button type="submit">Login</button>
-            {submitErrorMsg && <p>{errorMsg}</p>}
+            <button type="submit" onClick={this.onSubmitForm}>
+              Login
+            </button>
+            {submitErrorMsg && <p>*{errorMsg}</p>}
           </div>
         </form>
       </div>

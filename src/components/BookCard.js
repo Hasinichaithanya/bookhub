@@ -16,7 +16,8 @@ class BookCard extends Component {
             Avg Rating:{rating}
             <BsFillStarFill />
           </p>
-          <p>Status: {status}</p>
+          <p>Status: </p>
+          <p>{status}</p>
         </div>
       </Link>
     )

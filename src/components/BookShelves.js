@@ -13,12 +13,14 @@ const constants = {
   success: 'SUCCESS',
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS',
+  searchFail: 'SEARCH_FAILURE',
 }
 
 class BookShelves extends Component {
   state = {
     books: '',
     bookshelfName: 'ALL',
+    bookLabel: 'All',
     searchText: '',
     apiStatus: constants.initial,
   }
@@ -44,20 +46,28 @@ class BookShelves extends Component {
     const response = await fetch(url, options)
     if (response.ok === true) {
       const data = await response.json()
-      const updatedData = data.books.map(each => ({
-        id: each.id,
-        title: each.title,
-        coverPic: each.cover_pic,
-        status: each.read_status,
-        author: each.author_name,
-        rating: each.rating,
-      }))
-      console.log(updatedData)
+      if (data.books.length === 0) {
+        this.setState(
+          {
+            apiStatus: constants.searchFail,
+          },
+          this.renderBooks,
+        )
+      } else {
+        const updatedData = data.books.map(each => ({
+          id: each.id,
+          title: each.title,
+          coverPic: each.cover_pic,
+          status: each.read_status,
+          author: each.author_name,
+          rating: each.rating,
+        }))
 
-      this.setState({
-        books: updatedData,
-        apiStatus: constants.success,
-      })
+        this.setState({
+          books: updatedData,
+          apiStatus: constants.success,
+        })
+      }
     } else {
       this.setState({
         apiStatus: constants.failure,
@@ -72,6 +82,7 @@ class BookShelves extends Component {
     this.setState(
       {
         bookshelfName: tab.value,
+        bookLabel: tab.label,
       },
       this.getBooks,
     )
@@ -100,7 +111,7 @@ class BookShelves extends Component {
     return (
       <ul>
         {books.map(book => (
-          <li key={books.id}>
+          <li key={book.id}>
             <BookCard book={book} />
           </li>
         ))}
@@ -108,10 +119,23 @@ class BookShelves extends Component {
     )
   }
 
+  searchFailure = () => {
+    const {searchText} = this.state
+    return (
+      <div>
+        <img
+          src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697703414/Asset_1_1_1_qaeqzd.png"
+          alt="no books"
+        />
+        <p>Your search for {searchText} did not find any matches.</p>
+      </div>
+    )
+  }
+
   renderFailure = () => (
     <div>
       <img
-        src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697703414/Asset_1_1_1_qaeqzd.png"
+        src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697777828/Group_7522_dshfkz.png"
         alt="failure view"
       />
       <p>Something went wrong, Please try again.</p>
@@ -137,22 +161,21 @@ class BookShelves extends Component {
         return this.renderFailure()
       case constants.inProgress:
         return this.loadingView()
+      case constants.searchFail:
+        return this.searchFailure()
       default:
         return null
     }
   }
 
   onChangeInput = e => {
-    this.setState(
-      {
-        searchText: e.target.value,
-      },
-      this.getBooks,
-    )
+    this.setState({
+      searchText: e.target.value,
+    })
   }
 
   render() {
-    const {searchText} = this.state
+    const {searchText, bookLabel} = this.state
     const token = Cookies.get('jwt_token')
     if (token === undefined) {
       return <Redirect to="/login" />
@@ -160,14 +183,14 @@ class BookShelves extends Component {
     return (
       <>
         <Header />
-        <h1>All Books</h1>
-        <button type="button" testid="searchButton">
-          <input
-            type="search"
-            value={searchText}
-            onChange={this.onChangeInput}
-            placeholder="Search"
-          />
+        <h1>{bookLabel} Books</h1>
+        <input
+          type="search"
+          value={searchText}
+          onChange={this.onChangeInput}
+          placeholder="Search"
+        />
+        <button type="button" testid="searchButton" onClick={this.getBooks}>
           <BsSearch />
         </button>
         {this.renderFilters()}

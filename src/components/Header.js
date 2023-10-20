@@ -10,28 +10,33 @@ const Header = props => {
   }
   return (
     <nav className="header-container">
-      <Link to="/" className="home header-heading">
-        <img
-          src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
-          alt="website logo"
-          className="website-logo-image"
-        />
-      </Link>
+      <div className="home header-heading">
+        <Link to="/">
+          <img
+            src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
+            alt="website logo"
+            className="website-logo-image"
+          />
+        </Link>
+      </div>
       <ul>
-        <Link to="/" className="home header-heading">
-          <li>Home</li>
-        </Link>
-        <Link to="/shelf" className="header-heading">
-          <li>Bookshelves</li>
-        </Link>
+        <li className="home header-heading">
+          <Link to="/">Home</Link>
+        </li>
 
-        <button
-          type="button"
-          onClick={onLogout}
-          className="logout-btn header-heading"
-        >
-          Logout
-        </button>
+        <li className="header-heading">
+          <Link to="/shelf">Bookshelves</Link>
+        </li>
+
+        <li className="header-heading">
+          <button
+            type="button"
+            onClick={onLogout}
+            className="logout-btn header-heading"
+          >
+            Logout
+          </button>
+        </li>
       </ul>
     </nav>
   )

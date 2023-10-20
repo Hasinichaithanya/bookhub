@@ -7,10 +7,17 @@ import {Redirect} from 'react-router-dom'
 import Footer from './Footer'
 import Header from './Header'
 
+const constants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
+
 class BookShelves extends Component {
   state = {
     book: {},
-    apiStatus: '',
+    apiStatus: constants.initial,
   }
 
   componentDidMount() {
@@ -19,7 +26,7 @@ class BookShelves extends Component {
 
   getBookDetails = async () => {
     this.setState({
-      apiStatus: 'inProgress',
+      apiStatus: constants.inProgress,
     })
     const token = Cookies.get('jwt_token')
 
@@ -48,13 +55,71 @@ class BookShelves extends Component {
         aboutBook: details.about_book,
         status: details.read_status,
       }
-      this.setState({book: updatedBook, apiStatus: 'completed'})
+      this.setState({book: updatedBook, apiStatus: constants.success})
+    } else {
+      this.setState({
+        apiStatus: constants.failure,
+      })
+    }
+  }
+
+  renderBook = () => {
+    const {book} = this.state
+    const {title, status, aboutAuthor, aboutBook, author, rating, pic} = book
+    return (
+      <>
+        <div>
+          <img src={pic} alt={title} />
+          <h1>{title}</h1>
+          <p>{author}</p>
+          <p>
+            Avg Rating:{rating}
+            <BsFillStarFill />
+          </p>
+          <p>Status: {status}</p>
+          <h1>About Author</h1>
+          <p>{aboutAuthor}</p>
+          <h1>About Book</h1>
+          <p>{aboutBook}</p>
+        </div>
+      </>
+    )
+  }
+
+  renderFailure = () => (
+    <div>
+      <img
+        src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697777828/Group_7522_dshfkz.png"
+        alt="failure view"
+      />
+      <p>Something went wrong, Please try again.</p>
+      <button type="button" onClick={this.getBookDetails}>
+        Try Again
+      </button>
+    </div>
+  )
+
+  loadingView = () => (
+    <div className="loader-container" testid="loader">
+      <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
+    </div>
+  )
+
+  renderViews = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case constants.success:
+        return this.renderBook()
+      case constants.failure:
+        return this.renderFailure()
+      case constants.inProgress:
+        return this.loadingView()
+      default:
+        return null
     }
   }
 
   render() {
-    const {book, apiStatus} = this.state
-    const {title, status, aboutAuthor, aboutBook, author, rating, pic} = book
     const token = Cookies.get('jwt_token')
     if (token === undefined) {
       return <Redirect to="/login" />
@@ -62,30 +127,11 @@ class BookShelves extends Component {
     return (
       <>
         <Header />
-        {apiStatus === 'completed' ? (
-          <div>
-            <img src={pic} alt={title} />
-            <h1>{title}</h1>
-            <p>{author}</p>
-            <p>
-              Avg Rating:{rating}
-              <BsFillStarFill />
-            </p>
-            <p>Status: {status}</p>
-            <h1>About Author</h1>
-            <p>{aboutAuthor}</p>
-            <h1>About Book</h1>
-            <p>{aboutBook}</p>
-          </div>
-        ) : (
-          <div className="loader-container" testid="loader">
-            <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
-          </div>
-        )}
-
+        {this.renderViews()}
         <Footer />
       </>
     )
   }
 }
+
 export default BookShelves

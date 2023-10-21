@@ -10,7 +10,7 @@ const Header = props => {
   }
   return (
     <nav className="header-container">
-      <div className="home header-heading">
+      <ul className="home header-heading">
         <Link to="/">
           <img
             src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
@@ -18,8 +18,7 @@ const Header = props => {
             className="website-logo-image"
           />
         </Link>
-      </div>
-      <ul>
+
         <li className="home header-heading">
           <Link to="/">Home</Link>
         </li>

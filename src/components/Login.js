@@ -70,41 +70,40 @@ class Login extends Component {
           alt="website login"
           className="website-login-image"
         />
-        <form className="login-sub-container">
+        <div>
           <img
             src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
             alt="login website logo"
             className="website-logo-image"
           />
-          <div className="input-container">
-            <label htmlFor="username">Username*</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Username"
-              id="username"
-              value={username}
-              onChange={this.onChangeUsername}
-            />
-          </div>
-          <div className="input-container">
-            <label htmlFor="password">Password*</label>
-            <br />
-            <input
-              type="password"
-              placeholder="password"
-              id="password"
-              value={password}
-              onChange={this.onChangePassword}
-            />
-          </div>
-          <div>
-            <button type="submit" onClick={this.onSubmitForm}>
-              Login
-            </button>
+          <form className="login-sub-container" onSubmit={this.onSubmitForm}>
+            <div className="input-container">
+              <label htmlFor="username">Username*</label>
+              <br />
+              <input
+                type="text"
+                placeholder="Username"
+                id="username"
+                value={username}
+                onChange={this.onChangeUsername}
+              />
+            </div>
+            <div className="input-container">
+              <label htmlFor="password">Password*</label>
+              <br />
+              <input
+                type="password"
+                placeholder="password"
+                id="password"
+                value={password}
+                onChange={this.onChangePassword}
+              />
+            </div>
+
+            <button type="submit">Login</button>
             {submitErrorMsg && <p>*{errorMsg}</p>}
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     )
   }

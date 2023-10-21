@@ -43,7 +43,7 @@ class TopBooks extends Component {
           return (
             <li className="slick-item" key={id}>
               <Link to={`/books/${id}`}>
-                <img className="logo-image" src={coverPic} alt="cover pic" />
+                <img className="logo-image" src={coverPic} alt={title} />
                 <h1 className="heading">{title}</h1>
                 <p>{authorName}</p>
               </Link>

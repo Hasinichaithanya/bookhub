@@ -10,9 +10,7 @@
   align-items: center;
 }
 .top-books-slick {
-  width: 60%;
-  padding-left: 70px;
-  padding-right: 70px;
+  width: 70%;
 }
 .top-books-container {
   background-color: #ffffff;
@@ -62,5 +60,10 @@
     margin-left: 10%;
     font-size: 20px;
     width: 80%;
+  }
+  .top-books-slick {
+    width: 60%;
+    padding-left: 70px;
+    padding-right: 70px;
   }
 }

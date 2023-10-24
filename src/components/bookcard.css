@@ -1,0 +1,47 @@
+.book-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 15px;
+}
+.book-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 20px;
+  padding: -10px;
+  height: 50px;
+}
+.star {
+  color: yellow;
+  margin-right: 3px;
+}
+.book-image {
+  height: 220px;
+  width: 170px;
+  border-radius: 20px;
+}
+
+.book-title {
+  position: relative;
+  top: 10px;
+  font-size: 20px;
+  width: 80%;
+}
+.book-author {
+  position: relative;
+  top: -10px;
+}
+.book-rating {
+  position: relative;
+  top: -25px;
+}
+.book-status {
+  position: relative;
+  top: -40px;
+}
+span {
+  color: blue;
+}

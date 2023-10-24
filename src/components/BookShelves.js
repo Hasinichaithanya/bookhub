@@ -7,6 +7,7 @@ import {Redirect} from 'react-router-dom'
 import Footer from './Footer'
 import Header from './Header'
 import BookCard from './BookCard'
+import './Books.css'
 
 const constants = {
   initial: 'INITIAL',
@@ -109,7 +110,7 @@ class BookShelves extends Component {
   renderBooksSection = () => {
     const {books} = this.state
     return (
-      <ul>
+      <ul className="books-container">
         {books.map(book => (
           <li key={book.id}>
             <BookCard book={book} />
@@ -183,18 +184,24 @@ class BookShelves extends Component {
     return (
       <>
         <Header />
-        <h1>{bookLabel} Books</h1>
-        <input
-          type="search"
-          value={searchText}
-          onChange={this.onChangeInput}
-          placeholder="Search"
-        />
-        <button type="button" testid="searchButton" onClick={this.getBooks}>
-          <BsSearch />
-        </button>
-        {this.renderFilters()}
-        {this.renderBooks()}
+        <div className="bookshelf-container">
+          <h1 className="status-heading">{bookLabel} Books</h1>
+          <div className="books-search-container">
+            <input
+              type="search"
+              value={searchText}
+              onChange={this.onChangeInput}
+              placeholder="Search"
+            />
+            <button type="button" testid="searchButton" onClick={this.getBooks}>
+              <BsSearch />
+            </button>
+          </div>
+          <div className="filters-and-books-container">
+            {this.renderFilters()}
+            {this.renderBooks()}
+          </div>
+        </div>
         <Footer />
       </>
     )

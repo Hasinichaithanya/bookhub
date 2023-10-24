@@ -26,34 +26,40 @@ class Home extends Component {
   }
 
   CallApis = async () => {
-    this.setState({
-      apiStatus: constants.inProgress,
-    })
-    const token = Cookies.get('jwt_token')
-    const options = {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-    const response = await fetch(
-      'https://apis.ccbp.in/book-hub/top-rated-books',
-      options,
-    )
-    if (response.ok === true) {
-      const data = await response.json()
-      const updatedData = data.books.map(book => ({
-        id: book.id,
-        authorName: book.author_name,
-        coverPic: book.cover_pic,
-        title: book.title,
-      }))
-      console.log(updatedData)
+    try {
       this.setState({
-        topbooks: updatedData,
-        apiStatus: constants.success,
+        apiStatus: constants.inProgress,
       })
-    } else {
+      const token = Cookies.get('jwt_token')
+      const options = {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await fetch(
+        'https://apis.ccbp.in/book-hub/top-rated-books',
+        options,
+      )
+      if (response.ok === true) {
+        const data = await response.json()
+        const updatedData = data.books.map(book => ({
+          id: book.id,
+          authorName: book.author_name,
+          coverPic: book.cover_pic,
+          title: book.title,
+        }))
+        console.log(updatedData)
+        this.setState({
+          topbooks: updatedData,
+          apiStatus: constants.success,
+        })
+      } else {
+        this.setState({
+          apiStatus: constants.failure,
+        })
+      }
+    } catch (e) {
       this.setState({
         apiStatus: constants.failure,
       })

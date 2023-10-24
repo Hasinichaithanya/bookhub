@@ -6,10 +6,10 @@ import './topbooks.css'
 class TopBooks extends Component {
   renderSlider = () => {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: false,
       speed: 500,
-      slidesToShow: 3,
+      slidesToShow: 4,
       slidesToScroll: 1,
       responsive: [
         {

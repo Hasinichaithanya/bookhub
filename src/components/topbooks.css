@@ -11,25 +11,38 @@
   margin-top: 10px;
 }
 
-.logo-image {
-  width: 350px;
-  height: 292px;
+.top-book {
+  width: 300px;
+  height: 200px;
   top: 409px;
   left: 171px;
   border-radius: 4px;
 }
-.heading {
+.top-book-heading {
   font-size: 20px;
   color: #334155;
+  text-decoration: none;
 }
-p {
+.author-name {
   color: #475569;
+  text-decoration: none;
 }
-
+.slick-item {
+  padding: 20px;
+}
 /* You can change the CSS color to style the Next and 
 Previous Arrow buttons according to your project */
 
 .slick-prev:before,
 .slick-next:before {
   color: black;
+}
+@media (max-width: 800px) {
+  .slick-container {
+    width: 70%;
+  }
+  .top-book {
+    height: 100px;
+    width: 100px;
+  }
 }

@@ -83,25 +83,32 @@ class Home extends Component {
     const {topbooks} = this.state
 
     return (
-      <>
-        <h1>Find Your Next Favorite Books? </h1>
-        <p>
+      <div className="home-page-content">
+        <h1 className="home-page-heading">Find Your Next Favorite Books? </h1>
+        <p className="home-page-para">
           You are in the right place. Tell us what titles or genres you have
           enjoyed in the past, and we will give you surprisingly insightful
           recommendations.
         </p>
-        <div className="too-books-container">
+        <Link to="/shelf">
+          <button type="button" className="find-books-mobile">
+            Find Books
+          </button>
+        </Link>
+        <div className="top-books-container">
           <div className="top-books-heading">
             <h3 className="heading">Top Rated Books</h3>
             <Link to="/shelf">
-              <button type="button">Find Books</button>
+              <button type="button" className="find-books">
+                Find Books
+              </button>
             </Link>
           </div>
-          <ul>
+          <ul className="top-books-slick">
             <TopBooks topbooks={topbooks} />
           </ul>
         </div>
-      </>
+      </div>
     )
   }
 
@@ -126,7 +133,7 @@ class Home extends Component {
       return <Redirect to="/login" />
     }
     return (
-      <div>
+      <div className="top-books-section">
         <Header />
         {this.renderBooks()}
         <Footer />

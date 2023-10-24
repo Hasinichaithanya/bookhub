@@ -9,20 +9,20 @@ class TopBooks extends Component {
       dots: true,
       infinite: false,
       speed: 500,
-      slidesToShow: 4,
+      slidesToShow: 3,
       slidesToScroll: 1,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 4,
+            slidesToShow: 3,
             slidesToScroll: 1,
           },
         },
         {
           breakpoint: 600,
           settings: {
-            slidesToShow: 3,
+            slidesToShow: 2,
             slidesToScroll: 1,
           },
         },
@@ -43,9 +43,9 @@ class TopBooks extends Component {
           return (
             <li className="slick-item" key={id}>
               <Link to={`/books/${id}`}>
-                <img className="logo-image" src={coverPic} alt={title} />
-                <h1 className="heading">{title}</h1>
-                <p>{authorName}</p>
+                <img className="top-book" src={coverPic} alt={title} />
+                <h1 className="top-book-heading">{title}</h1>
+                <p className="author-name">{authorName}</p>
               </Link>
             </li>
           )

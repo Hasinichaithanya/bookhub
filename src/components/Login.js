@@ -3,12 +3,19 @@ import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
 import './Login.css'
 
+const constants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
+
 class Login extends Component {
   state = {
     username: '',
     password: '',
-    submitErrorMsg: '',
     errorMsg: '',
+    apiStatus: constants.initial,
   }
 
   onSuccess = token => {
@@ -19,8 +26,8 @@ class Login extends Component {
 
   onFailure = errorMsg => {
     this.setState({
-      submitErrorMsg: true,
       errorMsg,
+      apiStatus: constants.failure,
     })
   }
 
@@ -29,12 +36,12 @@ class Login extends Component {
     const {username, password} = this.state
     const userDetails = {username, password}
     if (username !== '' && password !== '') {
-      const url = 'https://apis.ccbp.in/login'
+      const apiUrl = 'https://apis.ccbp.in/login'
       const options = {
         method: 'POST',
         body: JSON.stringify(userDetails),
       }
-      const response = await fetch(url, options)
+      const response = await fetch(apiUrl, options)
       const data = await response.json()
       if (response.ok === true) {
         this.onSuccess(data.jwt_token)
@@ -43,7 +50,7 @@ class Login extends Component {
       }
     } else if (username === '' || password === '') {
       this.setState({
-        submitErrorMsg: true,
+        apiStatus: constants.failure,
         errorMsg: 'username and password are required',
       })
     }
@@ -58,7 +65,7 @@ class Login extends Component {
   }
 
   render() {
-    const {password, username, errorMsg, submitErrorMsg} = this.state
+    const {password, username, errorMsg, apiStatus} = this.state
     const token = Cookies.get('jwt_token')
     if (token !== undefined) {
       return <Redirect to="/" />
@@ -70,13 +77,18 @@ class Login extends Component {
           alt="website login"
           className="website-login-image"
         />
-        <div>
+        <img
+          src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1698123026/Ellipse_99_io6kpm.png"
+          alt="website login"
+          className="mobile-website-login-image"
+        />
+        <div className="login-sub-container">
           <img
             src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
             alt="login website logo"
             className="website-logo-image"
           />
-          <form className="login-sub-container" onSubmit={this.onSubmitForm}>
+          <form onSubmit={this.onSubmitForm}>
             <div className="input-container">
               <label htmlFor="username">Username*</label>
               <br />
@@ -93,15 +105,18 @@ class Login extends Component {
               <br />
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 id="password"
                 value={password}
                 onChange={this.onChangePassword}
               />
             </div>
-
-            <button type="submit">Login</button>
-            {submitErrorMsg && <p>*{errorMsg}</p>}
+            {apiStatus === constants.failure && (
+              <p className="error_msg">*{errorMsg}</p>
+            )}
+            <button type="submit" className="login-button">
+              Login
+            </button>
           </form>
         </div>
       </div>

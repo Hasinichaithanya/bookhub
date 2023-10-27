@@ -12,10 +12,10 @@
 
 .top-book {
   height: 200px;
-  width: 60%;
+  width: 100%;
   top: 409px;
   left: 171px;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 .top-book-heading {
   font-size: 20px;
@@ -40,6 +40,13 @@ Previous Arrow buttons according to your project */
 }
 
 @media (max-width: 800px) {
+  .slick-prev:before {
+    left: 15px;
+  }
+  .slick-next:before {
+    right: 15px;
+  }
+
   .slick-container {
     width: 70%;
     max-width: 400px;
@@ -51,6 +58,7 @@ Previous Arrow buttons according to your project */
   }
   .top-book-heading {
     font-size: 15px;
+    width: 100%;
   }
 
   .author-name {

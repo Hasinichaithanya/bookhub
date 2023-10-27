@@ -41,13 +41,13 @@ class TopBooks extends Component {
         {topbooks.map(each => {
           const {id, coverPic, title, authorName} = each
           return (
-            <li className="slick-item" key={id}>
+            <div className="slick-item" key={id}>
               <Link to={`/books/${id}`}>
                 <img className="top-book" src={coverPic} alt={title} />
-                <h1 className="top-book-heading">{title}</h1>
-                <p className="author-name">{authorName}</p>
               </Link>
-            </li>
+              <h1 className="top-book-heading">{title}</h1>
+              <p className="author-name">{authorName}</p>
+            </div>
           )
         })}
       </Slider>

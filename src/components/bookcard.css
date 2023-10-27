@@ -1,9 +1,9 @@
 .book-card {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 90%;
-  margin: 15px;
+  width: 400px;
+  max-width: 80%;
 }
 .book-details {
   display: flex;
@@ -12,7 +12,6 @@
   align-items: flex-start;
   margin-left: 20px;
   padding: -10px;
-  height: 50px;
 }
 .star {
   color: yellow;
@@ -44,4 +43,15 @@
 }
 span {
   color: blue;
+}
+
+@media (max-width: 800px) {
+  .book-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 330px;
+    max-width: 100%;
+    margin: 10px;
+  }
 }

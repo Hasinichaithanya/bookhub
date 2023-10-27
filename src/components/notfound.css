@@ -1,0 +1,14 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  color: white;
+  background-color: #0284c7;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}

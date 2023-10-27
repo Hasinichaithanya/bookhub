@@ -91,13 +91,20 @@ class BookShelves extends Component {
 
   renderFilters = () => {
     const {bookshelvesList} = this.props
+    const {bookLabel} = this.state
     return (
-      <div>
-        <h1>Bookshelves</h1>
-        <ul>
+      <div className="filters-container">
+        <h1 className="bookshelf-heading">Bookshelves</h1>
+        <ul className="filters">
           {bookshelvesList.map(each => (
             <li key={each.id}>
-              <button type="button" onClick={() => this.onChangeQuery(each.id)}>
+              <button
+                type="button"
+                className={
+                  bookLabel === each.label ? 'filter-btn-active' : 'filter-btn'
+                }
+                onClick={() => this.onChangeQuery(each.id)}
+              >
                 {each.label}
               </button>
             </li>
@@ -108,22 +115,64 @@ class BookShelves extends Component {
   }
 
   renderBooksSection = () => {
-    const {books} = this.state
+    const {books, bookLabel, searchText} = this.state
     return (
-      <ul className="books-container">
-        {books.map(book => (
-          <li key={book.id}>
-            <BookCard book={book} />
-          </li>
-        ))}
-      </ul>
+      <div>
+        <div className="search-heading-desktop">
+          <h1 className="status-heading-desktop">{bookLabel} Books</h1>
+          <div className="books-search-container-desktop">
+            <input
+              className="search-input"
+              type="search"
+              value={searchText}
+              onChange={this.onChangeInput}
+              placeholder="Search"
+            />
+            <button
+              type="button"
+              testid="searchButton"
+              className="search-btn"
+              onClick={this.getBooks}
+            >
+              <BsSearch className="search-icon" />
+            </button>
+          </div>
+        </div>
+        <ul className="books-container">
+          {books.map(book => (
+            <li key={book.id}>
+              <BookCard book={book} />
+            </li>
+          ))}
+        </ul>
+      </div>
     )
   }
 
   searchFailure = () => {
-    const {searchText} = this.state
+    const {searchText, bookLabel} = this.state
     return (
-      <div>
+      <div className="search-failure">
+        <div className="search-heading-desktop">
+          <h1 className="status-heading-desktop">{bookLabel} Books</h1>
+          <div className="books-search-container-desktop">
+            <input
+              className="search-input"
+              type="search"
+              value={searchText}
+              onChange={this.onChangeInput}
+              placeholder="Search"
+            />
+            <button
+              type="button"
+              testid="searchButton"
+              className="search-btn"
+              onClick={this.getBooks}
+            >
+              <BsSearch className="search-icon" />
+            </button>
+          </div>
+        </div>
         <img
           src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697703414/Asset_1_1_1_qaeqzd.png"
           alt="no books"
@@ -186,14 +235,20 @@ class BookShelves extends Component {
         <Header />
         <div className="bookshelf-container">
           <h1 className="status-heading">{bookLabel} Books</h1>
-          <div className="books-search-container">
+          <div className="books-search-container-mobile">
             <input
+              className="search-input"
               type="search"
               value={searchText}
               onChange={this.onChangeInput}
               placeholder="Search"
             />
-            <button type="button" testid="searchButton" onClick={this.getBooks}>
+            <button
+              type="button"
+              className="search-btn"
+              testid="searchButton"
+              onClick={this.getBooks}
+            >
               <BsSearch />
             </button>
           </div>

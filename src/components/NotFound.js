@@ -1,7 +1,8 @@
 import {Link} from 'react-router-dom'
+import './notfound.css'
 
 const NotFound = () => (
-  <div>
+  <div className="not-found">
     <h1>Page Not Found</h1>
     <p>we are sorry, the page you requested could not be found</p>
     <img
@@ -9,7 +10,9 @@ const NotFound = () => (
       alt="not found"
     />
     <Link to="/">
-      <button type="button">Go Back to Home</button>
+      <button type="button" className="btn">
+        Go Back to Home
+      </button>
     </Link>
   </div>
 )

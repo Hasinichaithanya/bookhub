@@ -11,19 +11,18 @@ class BookCard extends Component {
       <div className="book-card">
         <Link to={`/books/${id}`}>
           <img src={coverPic} alt={title} className="book-image" />
-
-          <div className="book-details">
-            <h1 className="book-title">{title}</h1>
-            <p className="book-author">{author}</p>
-            <p className="book-rating">
-              Avg Rating: <BsFillStarFill className="star" />
-              {rating}
-            </p>
-            <p className="book-status">
-              Status: <span>{status}</span>
-            </p>
-          </div>
         </Link>
+        <div className="book-details">
+          <h1 className="book-title">{title}</h1>
+          <p className="book-author">{author}</p>
+          <p className="book-rating">
+            Avg Rating: <BsFillStarFill className="star" />
+            {rating}
+          </p>
+          <p className="book-status">
+            Status: <span>{status}</span>
+          </p>
+        </div>
       </div>
     )
   }

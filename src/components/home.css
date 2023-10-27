@@ -2,16 +2,16 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
 }
 .home-page-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
-.top-books-slick {
-  width: 70%;
-}
+
 .top-books-container {
   background-color: #ffffff;
   width: 85%;
@@ -20,9 +20,30 @@
   justify-content: center;
   align-items: center;
 }
+
+.top-books-slick {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .top-books-section {
   background-color: #fafcfc;
   padding: 10px;
+}
+.render-books {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader-container,
+Loader {
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 @media (max-width: 800px) {
@@ -36,6 +57,9 @@
   }
   .find-books {
     display: none;
+  }
+  .top-books-container {
+    flex-direction: column;
   }
 }
 

@@ -6,6 +6,7 @@ import {Redirect} from 'react-router-dom'
 
 import Footer from './Footer'
 import Header from './Header'
+import './bookdetails.css'
 
 const constants = {
   initial: 'INITIAL',
@@ -67,22 +68,31 @@ class BookShelves extends Component {
     const {book} = this.state
     const {title, status, aboutAuthor, aboutBook, author, rating, pic} = book
     return (
-      <>
-        <div>
-          <img src={pic} alt={title} />
-          <h1>{title}</h1>
-          <p>{author}</p>
-          <p>
-            Avg Rating:{rating}
-            <BsFillStarFill />
-          </p>
-          <p>Status: {status}</p>
-          <h1>About Author</h1>
-          <p>{aboutAuthor}</p>
-          <h1>About Book</h1>
-          <p>{aboutBook}</p>
+      <div className="book-details-main-container">
+        <div className="book-details-card">
+          <div className="book-details-top-section">
+            <img src={pic} alt={title} className="book-details-image" />
+            <div className="single-book-details">
+              <h1 className="book-title-details">{title}</h1>
+              <p className="book-author-details">{author}</p>
+              <p className="book-rating-details">
+                Avg Rating: <BsFillStarFill className="star-details" />
+                {rating}
+              </p>
+              <p className="book-status-details">
+                Status: <span>{status}</span>
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div className="details-details">
+            <h1>About Author</h1>
+            <p>{aboutAuthor}</p>
+            <h1>About Book</h1>
+            <p>{aboutBook}</p>
+          </div>
         </div>
-      </>
+      </div>
     )
   }
 
@@ -127,7 +137,9 @@ class BookShelves extends Component {
     return (
       <>
         <Header />
-        {this.renderViews()}
+
+        <div className="">{this.renderViews()}</div>
+
         <Footer />
       </>
     )

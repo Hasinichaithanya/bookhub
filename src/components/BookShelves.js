@@ -152,7 +152,7 @@ class BookShelves extends Component {
   searchFailure = () => {
     const {searchText, bookLabel} = this.state
     return (
-      <div className="search-failure">
+      <div>
         <div className="search-heading-desktop">
           <h1 className="status-heading-desktop">{bookLabel} Books</h1>
           <div className="books-search-container-desktop">
@@ -173,11 +173,14 @@ class BookShelves extends Component {
             </button>
           </div>
         </div>
-        <img
-          src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697703414/Asset_1_1_1_qaeqzd.png"
-          alt="no books"
-        />
-        <p>Your search for {searchText} did not find any matches.</p>
+        <div className="search-failure">
+          <img
+            className="search-fail-image"
+            src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697703414/Asset_1_1_1_qaeqzd.png"
+            alt="no books"
+          />
+          <p>Your search for {searchText} did not find any matches.</p>
+        </div>
       </div>
     )
   }

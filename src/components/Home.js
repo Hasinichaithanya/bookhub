@@ -49,7 +49,6 @@ class Home extends Component {
           coverPic: book.cover_pic,
           title: book.title,
         }))
-        console.log(updatedData)
         this.setState({
           topbooks: updatedData,
           apiStatus: constants.success,

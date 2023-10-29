@@ -3,20 +3,19 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  height: 80px;
+  height: 70px;
   background-color: #ffffff;
 }
 .header-heading {
   text-decoration: none;
   padding: 10px;
+  color: #0284c7;
 }
-.home {
+.active {
   font-family: Inter;
   font-size: 16px;
   font-weight: 600;
-  line-height: 24px;
-  letter-spacing: 0em;
-  text-align: left;
+  font-style: italic;
 }
 .logout-btn {
   background-color: #0284c7;
@@ -33,6 +32,9 @@ ul {
   justify-content: center;
   align-items: center;
 }
+.website-logo-image {
+  padding: 15px;
+}
 @media (max-width: 800px) {
   .header-container-desktop {
     display: none;
@@ -43,7 +45,6 @@ ul {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    height: 89px;
     background-color: #ffffff;
   }
   .mobile-nav-items {
@@ -55,5 +56,10 @@ ul {
 @media (min-width: 801px) {
   .header-container-mobile {
     display: none;
+  }
+  .ul-items-desktop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -55,11 +55,7 @@ class TopBooks extends Component {
   }
 
   render() {
-    return (
-      <div className="main-container">
-        <div className="slick-container">{this.renderSlider()}</div>
-      </div>
-    )
+    return <div className="slick-container">{this.renderSlider()}</div>
   }
 }
 

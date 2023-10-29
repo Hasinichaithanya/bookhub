@@ -36,7 +36,6 @@ class BookShelves extends Component {
     })
     const {searchText, bookshelfName} = this.state
     const token = Cookies.get('jwt_token')
-    console.log(token)
     const options = {
       headers: {
         Authorization: `Bearer ${token}`,

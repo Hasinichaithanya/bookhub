@@ -14,7 +14,7 @@
 
 .top-books-container {
   background-color: #ffffff;
-  width: 85%;
+  max-width: 85%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,11 +38,6 @@
 }
 .loader-container,
 Loader {
-  align-self: center;
-  justify-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: auto;
 }
 
@@ -60,6 +55,9 @@ Loader {
   }
   .top-books-container {
     flex-direction: column;
+  }
+  .home-page-para {
+    text-align: center;
   }
 }
 
@@ -84,10 +82,5 @@ Loader {
     margin-left: 10%;
     font-size: 20px;
     width: 80%;
-  }
-  .top-books-slick {
-    width: 60%;
-    padding-left: 70px;
-    padding-right: 70px;
   }
 }

@@ -1,4 +1,4 @@
-import {Link, withRouter} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import './Header.css'
@@ -23,24 +23,36 @@ class Header extends Component {
     return (
       <>
         <nav className="header-container-desktop">
-          <Link to="/">
+          <NavLink
+            to="/"
+            isActive={(match, location) => location.pathname === '/'}
+          >
             <img
               src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
               alt="website logo"
               className="website-logo-image"
             />
-          </Link>
-          <ul>
+          </NavLink>
+          <ul className="ul-items-desktop">
             <li>
-              <Link className="home header-heading" to="/">
+              <NavLink
+                exact
+                to="/"
+                activeClassName="active header-heading"
+                className="header-heading"
+              >
                 Home
-              </Link>
+              </NavLink>
             </li>
-
             <li>
-              <Link className="header-heading" to="/shelf">
+              <NavLink
+                exact
+                activeClassName="active header-heading"
+                className="header-heading"
+                to="/shelf"
+              >
                 Bookshelves
-              </Link>
+              </NavLink>
             </li>
 
             <li className="header-heading">
@@ -55,13 +67,16 @@ class Header extends Component {
           </ul>
         </nav>
         <nav className="header-container-mobile">
-          <Link to="/">
+          <NavLink
+            to="/"
+            isActive={(match, location) => location.pathname === '/'}
+          >
             <img
               src="https://res.cloudinary.com/dlnpuom7o/image/upload/v1697352812/Group_7731_ymqkll.png"
               alt="website logo"
-              className="website-logo-image-mobile"
+              className="website-logo-image"
             />
-          </Link>
+          </NavLink>
 
           <button type="button" onClick={this.mobileMenu}>
             <img
@@ -74,16 +89,26 @@ class Header extends Component {
         <div>
           {menu && (
             <ul className="mobile-nav-items">
-              <li>
-                <Link className="home header-heading" to="/">
+              <li key="1">
+                <NavLink
+                  exact
+                  to="/"
+                  activeClassName="active header-heading"
+                  className="header-heading"
+                >
                   Home
-                </Link>
+                </NavLink>
               </li>
 
-              <li>
-                <Link className="header-heading" to="/shelf">
+              <li key="2">
+                <NavLink
+                  exact
+                  activeClassName="active header-heading"
+                  className="header-heading"
+                  to="/shelf"
+                >
                   Bookshelves
-                </Link>
+                </NavLink>
               </li>
 
               <li className="header-heading">

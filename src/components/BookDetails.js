@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {BsFillStarFill} from 'react-icons/bs'
-import Loader from 'react-loader-spinner'
+import BarLoader from 'react-spinners/BarLoader'
 import {Redirect} from 'react-router-dom'
 
 import Footer from './Footer'
@@ -76,7 +76,7 @@ class BookShelves extends Component {
               <h1 className="book-title-details">{title}</h1>
               <p className="book-author-details">{author}</p>
               <p className="book-rating-details">
-                Avg Rating: <BsFillStarFill className="star-details" />
+                Avg Rating: <BsFillStarFill className="star" />
                 {rating}
               </p>
               <p className="book-status-details">
@@ -103,7 +103,11 @@ class BookShelves extends Component {
         alt="failure view"
       />
       <p>Something went wrong, Please try again.</p>
-      <button type="button" onClick={this.getBookDetails}>
+      <button
+        type="button"
+        onClick={this.getBookDetails}
+        className="try-again-btn"
+      >
         Try Again
       </button>
     </div>
@@ -111,7 +115,7 @@ class BookShelves extends Component {
 
   loadingView = () => (
     <div className="loader-container" testid="loader">
-      <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
+      <BarLoader color="green" />
     </div>
   )
 
@@ -138,7 +142,7 @@ class BookShelves extends Component {
       <>
         <Header />
 
-        <div className="">{this.renderViews()}</div>
+        <div className="book-details-page">{this.renderViews()}</div>
 
         <Footer />
       </>
